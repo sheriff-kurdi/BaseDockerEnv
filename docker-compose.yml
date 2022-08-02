@@ -1,5 +1,7 @@
 version: '3'
 services:
+
+
   postgres_db:
     image: mdillon/postgis
     restart: always
@@ -15,8 +17,23 @@ services:
     networks:
       basic_env:
         ipv4_address: 10.5.0.2
-      
-      
+        
+        
+        
+  mysql_db:
+    image: mysql
+    restart: always
+    environment:
+      #this environment for creating an empty database
+      - MYSQL_ROOT_PASSWORD=123456789
+    ports:
+      - 3306:3306
+    networks:
+      basic_env:
+        ipv4_address: 10.5.0.3    
+
+        
+        
   mongo_db:
     image: mongo
     restart: always
@@ -24,17 +41,19 @@ services:
       - 27017:27017
     networks:
       basic_env:
-        ipv4_address: 10.5.0.3
+        ipv4_address: 10.5.0.4
       
       
   adminer:
     image: adminer
     restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456789
     ports:
       - 8084:8080
     networks:
       basic_env:
-        ipv4_address: 10.5.0.4
+        ipv4_address: 10.5.0.5
       
       
   elastic-mq:
@@ -44,7 +63,7 @@ services:
       - 9324:9324
     networks:
       basic_env:
-        ipv4_address: 10.5.0.5
+        ipv4_address: 10.5.0.6
       
 networks:
   basic_env:
