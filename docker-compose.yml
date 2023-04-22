@@ -5,6 +5,7 @@ services:
   postgres_db:
     image: mdillon/postgis
     restart: always
+    container_name: postgres
     environment:
       #this environment for creating an empty database
       - POSTGRES_DB=main_system
@@ -23,6 +24,7 @@ services:
   mysql_db:
     image: mysql
     restart: always
+    container_name: mysql
     environment:
       #this environment for creating an empty database
       - MYSQL_ROOT_PASSWORD=123456789
@@ -37,6 +39,7 @@ services:
   mongo_db:
     image: mongo
     restart: always
+    container_name: mongo
     ports:
       - 27017:27017
     networks:
@@ -47,6 +50,7 @@ services:
   adminer:
     image: adminer
     restart: always
+    container_name: adminer
     ports:
       - 8084:8080
     networks:
@@ -57,6 +61,7 @@ services:
   elastic-mq:
     image: softwaremill/elasticmq
     restart: always
+    container_name: elastic-mq
     ports:
       - 9324:9324
     networks:
